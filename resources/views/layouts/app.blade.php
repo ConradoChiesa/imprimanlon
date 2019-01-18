@@ -17,7 +17,6 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -25,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name') }}
+                    {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -34,9 +33,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                      <li class="nav-item">
-                          <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
-                      </li>
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -67,14 +64,6 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                    <a class="dropdown-item" href="{{ route('account') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('account-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('account') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
                                 </div>
                             </li>
                         @endguest
@@ -86,11 +75,6 @@
         <main class="py-4">
             @yield('content')
         </main>
-    </div>
-    <footer>
-      <div class="bg-dark col-3">
-
-      Contacto: <br>{{ config('mail.username') }} imprimanlon@gmail.com <br> <a href=" {{ config('app.url') }}"> {{ config('app.url') }}</a> <br> San Martín 869 <br> +549 249 4648354 </footer>
     </div>
 </body>
 </html>
