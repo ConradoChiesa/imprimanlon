@@ -26,6 +26,9 @@ Route::resources([
     'clients' => 'ClientController'
 ]);
 
+Route::get('/presupuesto', 'budgetController@create')->name('budget');
+Route::post('presupuesto', 'budgetController@store');
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::post('upload', 'budgetController@send_budget');

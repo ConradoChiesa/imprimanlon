@@ -35,16 +35,16 @@
         <h5 class="card-title">Pedir presupuesto</h5>
       </div>
       <div class="card-body">
-        <form class="form" id=”frm” action="upload" method="post" url=”upload” files=”true” enctype=”multipart/form-data”>
+        <form class="form" id=”frm” method="post" url=upload files=”true” enctype=”multipart/form-data”>
           @csrf
           <label for="">Titulo</label>
-          <input class="form-control" type="text" name="titulo" value="" placeholder="">
+          <input class="form-control" type="text" name="title" value="" placeholder="">
           <label for="">Descripción</label>
           <textarea rows="4" cols="50" class="form-control" name="description">
           </textarea>
           {{ csrf_field() }}
           <label for="">Adjuntar archivo</label>
-          <input class="form-control" type="file" name="file" value="" placeholder="">
+          <input class="form-control" type="file" name="img">
           <div class="justify-content-left">
             <button class="btn btn-primary" type="submit" name="button">Enviar!</button>
           </div>

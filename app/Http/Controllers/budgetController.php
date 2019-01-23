@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\budget;
 use Illuminate\Http\Request;
+use App\Http\Requests\BudgetFormRequest;
 
 class budgetController extends Controller
 {
@@ -12,19 +13,14 @@ class budgetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct()
+     {
+         $this->middleware('auth');
+     }
     public function index()
     {
         //
     }
-    public function send_file(Request $request)
- {
- $file = $request->file('file');
- dd($file);
- }
-    // public function send_file($value='')
-    // {
-    //   // code...
-    // }
     /**
      * Show the form for creating a new resource.
      *
@@ -32,7 +28,7 @@ class budgetController extends Controller
      */
     public function create()
     {
-        //
+        return view('budget');
     }
 
     /**
@@ -41,9 +37,17 @@ class budgetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BudgetFormRequest $request)
     {
-        //
+        //return $request->all();
+        $slug = uniqid();
+        $budget = new budget(array(
+          'title' => $request->get('title'),
+          'description' => $request->get('description'),
+          'slug' => $slug
+        ));
+        $budget->save();
+        return redirect('/presupuesto')->with('status', 'Su presupuesto ha sido recibido, su id única es ' . $slug);
     }
 
     /**
@@ -91,3 +95,17 @@ class budgetController extends Controller
         //
     }
 }
+//    public function send_budget(Request $request)
+// {
+//   $title = $request->file('Archivo');
+//   dd($file);
+//   $input = $request->all();
+//
+//   \App\Client::create($input);
+//
+//   return view('home');
+// }
+// public function send_file($value='')
+// {
+//   // code...
+// }
