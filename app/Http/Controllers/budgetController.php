@@ -39,15 +39,27 @@ class budgetController extends Controller
      */
     public function store(BudgetFormRequest $request)
     {
-        //return $request->all();
+      dd($request->file('attached'));
+      foreach ($request->attached as $image) {
+        $filename = $image->store('images');
+        images::create([
+          'budget_id' => $budget->id,
+          'image_dir' => $filename
+        ]);
+      }
         $slug = uniqid();
+        $budget = budget::create($request->all());
         $budget = new budget(array(
           'title' => $request->get('title'),
           'description' => $request->get('description'),
           'slug' => $slug
         ));
         $budget->save();
-        return redirect('/presupuesto')->with('status', 'Su presupuesto ha sido recibido, su id única es ' . $slug);
+
+        //
+                return redirect('/presupuesto')->with('status', 'Su presupuesto ha sido recibido, su id única es ' . $slug);
+                // return redirect('/');
+
     }
 
     /**

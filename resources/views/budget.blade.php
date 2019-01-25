@@ -7,7 +7,7 @@
           <h5 class="card-title">Pedir presupuesto</h5>
         </div>
         <div class="card-body">
-          <form class="form" id=”frm” method="post" files=”true” enctype=”multipart/form-data”>
+          <form class="form" action="presupuesto" id=”frm” method="post" files=”true” enctype=”multipart/form-data”>
             @csrf
             @foreach ($errors->all() as $error)
               <p class="alert alert-danger">{{ $error}}</p><br>
@@ -19,7 +19,7 @@
             <textarea rows="4" cols="50" class="form-control" name="description" id="description" value="{{ old('description') }}" required>
             </textarea>
             <label for="">Adjuntar archivo</label>
-            <!-- <input class="form-control" type="file" name="img"> -->
+            <input class="form-control" type="file" name="attached" id="attached" multiple>
             <div class="justify-content-left">
               <button class="btn btn-primary" type="submit" name="button">Enviar!</button>
             </div>
@@ -29,5 +29,5 @@
     </div>
   </div>
 <br>
-    <a href="{{ url('/') }}">Volver</a>
+    <a href="{{ url('/home') }}">Volver</a>
   @endsection
